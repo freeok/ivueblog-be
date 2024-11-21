@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    # 数据库驱动：
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接地址
+    url: jdbc:mysql://localhost:3306/ivueblog?
+      serverTimezone=Asia/Shanghai
+      &useUnicode=true
+      &characterEncoding=utf-8
+      &useSSL=true
+    # 数据库用户名&密码：
+    username: root
+    password: root
+
+shiro-redis:
+  enabled: true
+  redis-manager:
+    host: localhost:6379
+

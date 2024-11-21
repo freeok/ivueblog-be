@@ -1,0 +1,53 @@
+server:
+  port: 8181
+  servlet:
+    encoding:
+      charset: UTF-8
+      # 请求参数和返回参数强制编码
+      force: true
+
+spring:
+  application:
+    # 应用名称
+    name: ivueblog
+
+  jackson:
+    # 解决前端取回日期少8个小时问题
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 字段值为null时不做返回
+    default-property-inclusion: non_null
+
+  profiles:
+    active: dev
+
+  # 下述配置目的是为了捕获404异常并抛出
+  mvc:
+    #出现错误时, 直接抛出异常
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      #关闭工程中的资源文件建立映射（如果集成了swagger会访问不到，需要手动定义静态资源的映射）
+      add-mappings: false
+  # 上述配置目的是为了捕获404异常并抛出
+
+mybatis-plus:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  # 搜索指定包别名
+  type-aliases-package: work.pcdd.ivueblog.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 以下为自定义参数
+pcdd:
+  jwt:
+    # 密钥
+    secret: $2020#9#6$
+    # jwt有效期1天（单位秒）
+    expire: 86400
+    header: Authorization
+  redis:
+    # 方法缓存有效期(单位：天)（加了@Cacheable等注解的方法）
+    method-expire: 7
+
